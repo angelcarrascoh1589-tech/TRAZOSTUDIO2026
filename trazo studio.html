@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Trazo Studio diseña y desarrolla sitios web modernos, elegantes y funcionales para negocios y empresas.">
+  <meta name="theme-color" content="#101010">
+  <title>Trazo Studio — Diseñamos ideas. Construimos experiencias.</title>
+  <style>
+    :root{
+      --bg:#101010;--panel:#171717;--panel2:#1d1d1d;--white:#f5f5f2;
+      --muted:#a3a3a0;--line:rgba(255,255,255,.13);--soft:#d7d7d2;
+      --max:1180px;--radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    button,input,textarea,select{font:inherit}
+    .wrap{width:min(var(--max),calc(100% - 48px));margin:auto}
+    .topline{height:4px;background:linear-gradient(90deg,#fff,#777,#333)}
+    header{position:sticky;top:0;z-index:20;background:rgba(16,16,16,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+    .nav{height:82px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.13em;font-size:17px}
+    .brand-mark{width:34px;height:34px;display:grid;place-items:center;border:1px solid #777;border-radius:10px;font-weight:900;font-size:20px;line-height:1}
+    .brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:.28em;font-weight:600;margin-top:-3px}
+    .links{display:flex;align-items:center;gap:30px;color:#c8c8c4;font-size:13px}
+    .links a:hover{color:#fff}
+    .nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 19px;border-radius:999px;background:var(--white);color:#111;font-weight:750;font-size:13px;transition:.2s;border:1px solid var(--white);cursor:pointer}
+    .nav-cta:hover,.btn:hover{transform:translateY(-2px);background:#d8d8d3}
+    .menu-btn{display:none;background:none;color:white;border:1px solid var(--line);border-radius:50%;width:42px;height:42px;font-size:20px}
+    .hero{padding:105px 0 92px;position:relative;overflow:hidden}
+    .hero:after{content:"";position:absolute;width:540px;height:540px;border:1px solid rgba(255,255,255,.08);border-radius:50%;right:-160px;top:5px;box-shadow:0 0 0 65px rgba(255,255,255,.018),0 0 0 130px rgba(255,255,255,.012);pointer-events:none}
+    .eyebrow{display:flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:.2em;font-size:10px;color:#aaa;margin-bottom:25px}
+    .dot{width:7px;height:7px;border-radius:50%;background:#eee;box-shadow:0 0 15px #fff}
+    h1{font-size:clamp(48px,8vw,98px);line-height:.98;letter-spacing:-.075em;max-width:900px;margin:0;font-weight:650}
+    h1 span{color:#858581}
+    .hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:35px;margin-top:42px;position:relative;z-index:1}
+    .hero-copy{max-width:470px;color:#b8b8b3;font-size:16px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn-outline{display:inline-flex;align-items:center;justify-content:center;padding:13px 19px;border:1px solid var(--line);border-radius:999px;font-size:13px;font-weight:650;transition:.2s}
+    .btn-outline:hover{border-color:#eee;background:rgba(255,255,255,.06)}
+    .hero-meta{display:flex;gap:50px;border-top:1px solid var(--line);margin-top:75px;padding-top:22px;color:#8e8e89;font-size:11px;text-transform:uppercase;letter-spacing:.12em}
+    .hero-meta strong{display:block;color:#eee;font-size:13px;letter-spacing:0;margin-bottom:3px}
+    section{padding:100px 0;border-top:1px solid var(--line)}
+    .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:44px}
+    .kicker{font-size:10px;color:#92928d;text-transform:uppercase;letter-spacing:.2em;margin-bottom:13px}
+    h2{font-size:clamp(34px,5vw,57px);letter-spacing:-.06em;line-height:1.05;font-weight:600;margin:0}
+    .section-intro{max-width:390px;color:var(--muted);font-size:14px;margin:0}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}
+    .about-statement{font-size:clamp(25px,3vw,39px);line-height:1.25;letter-spacing:-.045em;margin:0}
+    .about-statement span{color:#777}
+    .about-text{color:var(--muted);font-size:14px;max-width:490px}
+    .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:50px}
+    .principle{padding:22px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,#191919,#121212)}
+    .principle b{display:block;font-size:13px;margin-bottom:8px}
+    .principle p{margin:0;color:var(--muted);font-size:12px}
+    .services{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .service{min-height:220px;padding:28px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,#1b1b1b,#131313);display:flex;flex-direction:column;justify-content:space-between;transition:.25s}
+    .service:hover{transform:translateY(-4px);border-color:#777}
+    .service-top{display:flex;justify-content:space-between;color:#8f8f8a;font-size:11px;letter-spacing:.13em}
+    .service-icon{width:43px;height:43px;border:1px solid #555;border-radius:13px;display:grid;place-items:center;color:#eee;font-size:18px}
+    .service h3{font-size:23px;letter-spacing:-.04em;margin:28px 0 7px}
+    .service p{margin:0;color:var(--muted);font-size:13px;max-width:430px}
+    .process{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+    .step{border-top:1px solid #777;padding:18px 14px 0 0}
+    .step-number{font-size:11px;color:#777;letter-spacing:.14em}
+    .step h3{font-size:17px;margin:20px 0 8px}
+    .step p{font-size:12px;color:var(--muted);margin:0}
+    .showcase{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+    .showcase-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#171717;min-height:310px;position:relative}
+    .showcase-main{padding:34px;display:flex;flex-direction:column;justify-content:space-between;background:radial-gradient(ellipse at 80% 20%,#424242 0,#222 35%,#151515 72%)}
+    .mock-browser{border:1px solid #777;border-radius:12px;overflow:hidden;background:#101010;box-shadow:0 25px 70px #0008;transform:rotate(-2deg);max-width:540px;width:100%;margin:8px auto 18px}
+    .browser-bar{height:27px;border-bottom:1px solid #444;display:flex;align-items:center;gap:5px;padding:0 10px}
+    .browser-bar i{width:5px;height:5px;background:#777;border-radius:50%}
+    .mock-site{padding:24px;min-height:185px}
+    .mock-nav{font-size:8px;letter-spacing:.15em;color:#aaa;display:flex;justify-content:space-between}
+    .mock-title{font-size:clamp(25px,4vw,43px);line-height:1;letter-spacing:-.06em;margin:32px 0 13px}
+    .mock-sub{font-size:9px;color:#aaa;max-width:190px}
+    .mock-button{display:inline-block;margin-top:17px;padding:7px 11px;border:1px solid #aaa;border-radius:30px;font-size:8px}
+    .showcase-side{padding:30px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(155deg,#252525,#141414)}
+    .showcase-side .big-t{font-size:130px;font-weight:800;letter-spacing:-.12em;line-height:.8;color:#e9e9e5;text-align:center;margin:20px 0}
+    .showcase-side p{color:var(--muted);font-size:13px;margin:0}
+    .cta-band{padding:65px;border-radius:var(--radius);background:#e9e9e5;color:#111;display:flex;justify-content:space-between;align-items:flex-end;gap:35px}
+    .cta-band .kicker{color:#555}
+    .cta-band h2{max-width:650px}
+    .cta-band p{color:#555;font-size:14px;max-width:410px}
+    .cta-band .btn{background:#111;color:#fff;border-color:#111;white-space:nowrap}
+    .contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:65px}
+    .contact-info p{color:var(--muted);font-size:14px;max-width:350px}
+    .contact-line{padding:15px 0;border-bottom:1px solid var(--line);font-size:13px;display:flex;justify-content:space-between;gap:15px}
+    .contact-line span{color:#888}
+    form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    label{display:block;font-size:11px;color:#aaa;margin-bottom:7px}
+    .field.full{grid-column:1/-1}
+    input,textarea,select{width:100%;background:#181818;border:1px solid #3a3a3a;border-radius:11px;padding:14px;color:#f5f5f2;outline:none}
+    input:focus,textarea:focus,select:focus{border-color:#aaa}
+    textarea{min-height:120px;resize:vertical}
+    form button{grid-column:1/-1;justify-self:start;margin-top:4px}
+    .form-note{grid-column:1/-1;color:#777;font-size:10px;margin:0}
+    footer{padding:30px 0 40px;border-top:1px solid var(--line);color:#888;font-size:11px}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px}
+    .footer-links{display:flex;gap:20px}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
+    .reveal.visible{opacity:1;transform:none}
+    @media(max-width:800px){
+      .links{display:none;position:absolute;top:82px;left:0;right:0;background:#151515;padding:22px 24px 28px;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:18px}
+      .links.open{display:flex}.menu-btn{display:block}.nav-cta{display:none}
+      .hero{padding:80px 0 65px}.hero-bottom{align-items:flex-start;flex-direction:column}.hero-meta{gap:24px;flex-wrap:wrap}
+      section{padding:75px 0}.section-head{align-items:flex-start;flex-direction:column}
+      .about-grid,.contact-grid{grid-template-columns:1fr;gap:28px}
+      .principles{grid-template-columns:1fr}.process{grid-template-columns:1fr 1fr;row-gap:28px}
+      .showcase{grid-template-columns:1fr}.showcase-side{min-height:250px}
+      .cta-band{padding:35px;align-items:flex-start;flex-direction:column}
+    }
+    @media(max-width:520px){
+      .wrap{width:min(var(--max),calc(100% - 32px))}
+      .hero-actions{width:100%}.hero-actions a{flex:1}
+      .services{grid-template-columns:1fr}.service{min-height:190px}
+      .process{grid-template-columns:1fr 1fr}
+      form{grid-template-columns:1fr}.field.full,form button,.form-note{grid-column:1}
+      .footer-inner{align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}
+      .hero-meta{display:grid;grid-template-columns:1fr 1fr}
+    }
+
+    /* ---------- Hero animado ---------- */
+    .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(520px circle at var(--mx,70%) var(--my,30%),rgba(255,255,255,.07),transparent 65%);pointer-events:none;transition:background .15s}
+    .hero .wrap{position:relative;z-index:1}
+    h1{padding-bottom:.04em}
+    .ln{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
+    .ln>span{display:inline-block;transform:translateY(110%);animation:up 1.1s cubic-bezier(.2,.8,.1,1) forwards}
+    .ln:nth-child(1)>span{animation-delay:.15s}.ln:nth-child(2)>span{animation-delay:.3s}.ln:nth-child(3)>span{animation-delay:.45s}
+    .ln .g{color:#858581}
+    @keyframes up{to{transform:none}}
+    @keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+    .in{opacity:0;animation:fade .9s ease forwards}
+    .hero-art{position:absolute;right:-30px;top:40px;width:min(600px,62vw);pointer-events:none;z-index:0}
+    .hero-art path{fill:none;stroke:#f5f5f2;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+    .hero-art .p1{stroke-width:2.2;animation:draw 2.8s cubic-bezier(.6,.1,.2,1) .6s forwards}
+    .hero-art .p2{stroke-width:1;stroke:#777;animation:draw 3.2s ease 1s forwards}
+    .hero-art circle{fill:#f5f5f2;opacity:0;animation:fade .6s ease 3.3s forwards}
+    .hero-art .ring{fill:none;stroke:#f5f5f2;stroke-width:1;transform-origin:center;transform-box:fill-box;animation:ring 2.4s ease-out 3.4s infinite}
+    @keyframes draw{to{stroke-dashoffset:0}}
+    @keyframes ring{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(4)}}
+    .marq{border-top:1px solid var(--line);overflow:hidden;padding:20px 0;color:#9a9a95;font-size:14px;letter-spacing:-.01em}
+    .marq-track{display:flex;gap:46px;width:max-content;animation:mq 30s linear infinite}
+    .marq:hover .marq-track{animation-play-state:paused}
+    .marq-track span:nth-child(even){color:#555}
+    @keyframes mq{to{transform:translateX(-50%)}}
+    .contact-line a{border-bottom:1px solid #555;transition:.2s}.contact-line a:hover{border-color:#fff}
+    .wa-float{position:fixed;right:20px;bottom:20px;z-index:30;display:flex;align-items:center;gap:10px;padding:13px 18px;border-radius:999px;background:var(--white);color:#111;font-weight:750;font-size:13px;box-shadow:0 10px 40px #000a;transition:.2s}
+    .wa-float:hover{transform:translateY(-3px)}
+    .wa-float i{width:9px;height:9px;border-radius:50%;background:#1faa59;box-shadow:0 0 0 0 #1faa59aa;animation:pulse 2s infinite}
+    @keyframes pulse{70%{box-shadow:0 0 0 10px #1faa5900}100%{box-shadow:0 0 0 0 #1faa5900}}
+    .service,.principle,.step{transition:.3s}
+    .principle:hover{border-color:#777;transform:translateY(-3px)}
+    .showcase-side .big-t{animation:float 6s ease-in-out infinite}
+    @keyframes float{50%{transform:translateY(-10px)}}
+    :focus-visible{outline:2px solid #fff;outline-offset:3px}
+    @media(max-width:800px){.hero-art{opacity:.35;top:20px}.wa-float span{display:none}.wa-float{padding:15px}}
+    @media(prefers-reduced-motion:reduce){
+      *,*:before,*:after{animation:none!important;transition:none!important}
+      .ln>span{transform:none}.in,.hero-art circle{opacity:1}.hero-art path{stroke-dashoffset:0}.reveal{opacity:1;transform:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#inicio" aria-label="Trazo Studio inicio">
+        <span class="brand-mark">T</span><span>TRAZO<small>STUDIO</small></span>
+      </a>
+      <nav class="links" id="navLinks" aria-label="Navegación principal">
+        <a href="#nosotros">Nosotros</a><a href="#servicios">Servicios</a><a href="#proceso">Proceso</a><a href="#contacto">Contacto</a>
+      </nav>
+      <a class="nav-cta" href="#contacto">Hablemos de tu proyecto <span>↗</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio" style="border:0">
+      <div class="wrap">
+        <div class="eyebrow in"><span class="dot"></span> Estudio creativo · Diseño y desarrollo web</div>
+        <svg class="hero-art" viewBox="0 0 600 460" aria-hidden="true"><path class="p2" pathLength="1" d="M10 380 C150 420 330 440 590 300"/><path class="p1" pathLength="1" d="M30 330 C110 60 250 40 300 190 S430 400 540 110"/><circle cx="540" cy="110" r="6"/><circle class="ring" cx="540" cy="110" r="6"/></svg>
+        <h1><span class="ln"><span>Diseñamos ideas.</span></span><span class="ln"><span class="g">Construimos</span></span><span class="ln"><span>experiencias.</span></span></h1>
+        <div class="hero-bottom in" style="animation-delay:.9s">
+          <p class="hero-copy">Creamos sitios web modernos, funcionales y personalizados para marcas, negocios y empresas que quieren dar el siguiente paso en el mundo digital.</p>
+          <div class="hero-actions">
+            <a class="btn" href="https://wa.me/523351928490?text=Hola%20Trazo%20Studio%2C%20quiero%20cotizar%20un%20sitio%20web" target="_blank" rel="noopener">Cotizar por WhatsApp <span>↗</span></a>
+            <a class="btn-outline" href="#servicios">Conocer servicios</a>
+          </div>
+        </div>
+        <div class="hero-meta in" style="animation-delay:1.2s">
+          <div><strong>Diseño a medida</strong>Identidad y propósito</div>
+          <div><strong>Desarrollo web</strong>Funcionalidad y detalle</div>
+          <div><strong>Experiencia digital</strong>En cada dispositivo</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="marq" aria-hidden="true"><div class="marq-track"><span>Sitios empresariales</span><span>✦</span><span>Tiendas y catálogos</span><span>✦</span><span>Turismo y hospitalidad</span><span>✦</span><span>Funciones personalizadas</span><span>✦</span><span>Diseño a medida</span><span>✦</span><span>Hecho para móvil</span><span>✦</span><span>Sitios empresariales</span><span>✦</span><span>Tiendas y catálogos</span><span>✦</span><span>Turismo y hospitalidad</span><span>✦</span><span>Funciones personalizadas</span><span>✦</span><span>Diseño a medida</span><span>✦</span><span>Hecho para móvil</span><span>✦</span></div></div>
+
+    <section id="nosotros">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">01 / El estudio</div><h2>Diseño con intención.<br>Desarrollo con propósito.</h2></div>
+          <p class="section-intro">Cada negocio tiene algo único que contar. Nuestro trabajo es convertirlo en una experiencia digital clara, atractiva y útil para sus clientes.</p>
+        </div>
+        <div class="about-grid reveal">
+          <p class="about-statement">No se trata solo de tener una página web. <span>Se trata de crear una presencia digital que represente lo que eres y hacia dónde quieres llegar.</span></p>
+          <div class="about-text">
+            <p>En Trazo Studio combinamos diseño, tecnología y creatividad para desarrollar sitios web que comuniquen profesionalismo y faciliten la conexión entre las marcas y las personas.</p>
+            <p>Trabajamos de manera cercana con cada cliente para entender sus objetivos y construir una solución adaptada a sus necesidades.</p>
+          </div>
+        </div>
+        <div class="principles reveal">
+          <div class="principle"><b>01 — Personalización</b><p>Cada proyecto parte de la identidad y los objetivos de tu negocio.</p></div>
+          <div class="principle"><b>02 — Claridad</b><p>Diseños intuitivos que ayudan a tus visitantes a encontrar lo que buscan.</p></div>
+          <div class="principle"><b>03 — Funcionalidad</b><p>Experiencias pensadas para funcionar en móviles y computadoras.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">02 / Lo que hacemos</div><h2>Soluciones digitales<br>a la medida.</h2></div>
+          <p class="section-intro">Desde una presencia web profesional hasta una experiencia digital más completa. Definimos el alcance según lo que tu negocio necesita.</p>
+        </div>
+        <div class="services">
+          <article class="service reveal"><div class="service-top"><span>01 / PRESENCIA</span><span class="service-icon">↗</span></div><div><h3>Sitios empresariales</h3><p>Presenta tu empresa, servicios, equipo y valores con una imagen profesional y coherente.</p></div></article>
+          <article class="service reveal"><div class="service-top"><span>02 / COMERCIO</span><span class="service-icon">◇</span></div><div><h3>Tiendas y catálogos</h3><p>Organiza tus productos o servicios en un espacio digital claro y fácil de explorar.</p></div></article>
+          <article class="service reveal"><div class="service-top"><span>03 / EXPERIENCIAS</span><span class="service-icon">⌘</span></div><div><h3>Turismo y hospitalidad</h3><p>Sitios para hoteles, restaurantes, experiencias turísticas y negocios locales.</p></div></article>
+          <article class="service reveal"><div class="service-top"><span>04 / A MEDIDA</span><span class="service-icon">＋</span></div><div><h3>Funciones personalizadas</h3><p>Formularios, galerías, secciones especiales y herramientas según los objetivos del proyecto.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proceso">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">03 / Cómo trabajamos</div><h2>Un proceso claro.<br>De principio a fin.</h2></div>
+          <p class="section-intro">Te acompañamos durante las etapas del proyecto para que sepas qué estamos construyendo y por qué.</p>
+        </div>
+        <div class="process reveal">
+          <div class="step"><span class="step-number">01 — DESCUBRIR</span><h3>Escuchamos</h3><p>Conocemos tu negocio, tus clientes y tus objetivos.</p></div>
+          <div class="step"><span class="step-number">02 — PLANEAR</span><h3>Proponemos</h3><p>Definimos estructura, alcance, tiempos y presupuesto.</p></div>
+          <div class="step"><span class="step-number">03 — DISEÑAR</span><h3>Diseñamos</h3><p>Construimos una propuesta visual alineada con tu marca.</p></div>
+          <div class="step"><span class="step-number">04 — CREAR</span><h3>Desarrollamos</h3><p>Convertimos el diseño en un sitio funcional y adaptable.</p></div>
+          <div class="step"><span class="step-number">05 — ENTREGAR</span><h3>Publicamos</h3><p>Revisamos los detalles y coordinamos la entrega del proyecto.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">04 / La experiencia Trazo</div><h2>Una presencia digital<br>que habla por tu marca.</h2></div>
+          <p class="section-intro">Diseño limpio, mensajes claros y una experiencia consistente en cualquier pantalla.</p>
+        </div>
+        <div class="showcase reveal">
+          <div class="showcase-card showcase-main">
+            <div class="eyebrow">Diseño web · Concepto visual</div>
+            <div class="mock-browser">
+              <div class="browser-bar"><i></i><i></i><i></i></div>
+              <div class="mock-site">
+                <div class="mock-nav"><b>YOUR BRAND</b><span>INICIO　 SERVICIOS　 CONTACTO</span></div>
+                <div class="mock-title">Una nueva<br>forma de llegar.</div>
+                <div class="mock-sub">Experiencias digitales diseñadas para conectar con tus clientes.</div>
+                <span class="mock-button">DESCUBRE MÁS ↗</span>
+              </div>
+            </div>
+            <div class="kicker">Cada detalle tiene una intención.</div>
+          </div>
+          <div class="showcase-card showcase-side">
+            <div class="kicker">La firma del estudio</div>
+            <div class="big-t">T.</div>
+            <p>Una identidad sencilla, una idea clara y un enfoque en lo que realmente importa: tu negocio.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="cta-band reveal">
+          <div><div class="kicker">Tu próximo paso empieza aquí</div><h2>Tu idea merece un espacio en internet.</h2><p>Cuéntanos qué tienes en mente. Escucharemos tu proyecto y prepararemos una propuesta acorde con tus objetivos.</p></div>
+          <a class="btn" href="#contacto">Hablemos ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">05 / Contacto</div><h2>Hagamos algo<br>que valga la pena.</h2></div>
+          <p class="section-intro">Cuéntanos un poco sobre tu negocio y el sitio web que te gustaría crear. El primer paso es una conversación.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <p>¿Tienes una idea, un negocio en crecimiento o una empresa que necesita renovar su presencia digital? Nos gustaría conocerla.</p>
+            <div class="contact-line"><span>Marca</span><b>Trazo Studio</b></div>
+            <div class="contact-line"><span>Servicios</span><b>Diseño & desarrollo web</b></div>
+            <div class="contact-line"><span>WhatsApp</span><b><a href="https://wa.me/523351928490?text=Hola%20Trazo%20Studio%2C%20quiero%20cotizar%20un%20sitio%20web" target="_blank" rel="noopener">335 192 8490</a></b></div>
+            <div class="contact-line"><span>Instagram</span><b><a href="https://instagram.com/trazostudio2026" target="_blank" rel="noopener">@trazostudio2026</a></b></div>
+            <div class="contact-line"><span>Atención</span><b>Con cita / previa consulta</b></div>
+            
+          </div>
+          <form id="contactForm">
+            <div class="field"><label for="name">Tu nombre</label><input id="name" name="name" placeholder="¿Cómo te llamas?" required></div>
+            <div class="field"><label for="business">Tu negocio</label><input id="business" name="business" placeholder="Nombre de tu empresa"></div>
+            <div class="field"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" placeholder="tunombre@correo.com" required></div>
+            <div class="field"><label for="type">Tipo de proyecto</label><select id="type" name="type"><option>Sitio empresarial</option><option>Tienda o catálogo digital</option><option>Restaurante / hotel / turismo</option><option>Proyecto personalizado</option><option>Quiero asesoría</option></select></div>
+            <div class="field full"><label for="message">Cuéntanos tu idea</label><textarea id="message" name="message" placeholder="¿Qué te gustaría lograr con tu página web?"></textarea></div>
+            <button class="btn" type="submit">Enviar por WhatsApp <span>↗</span></button>
+            <p class="form-note">Al enviar, se abrirá WhatsApp con tu mensaje listo para mandar. No se almacena información en este sitio.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <a class="brand" href="#inicio"><span class="brand-mark">T</span><span>TRAZO<small>STUDIO</small></span></a>
+      <span>© <span id="year"></span> Trazo Studio. Todos los derechos reservados.</span>
+      <div class="footer-links"><a href="#nosotros">Nosotros</a><a href="#servicios">Servicios</a><a href="#contacto">Contacto</a><a href="https://instagram.com/trazostudio2026" target="_blank" rel="noopener">Instagram</a><a href="https://wa.me/523351928490?text=Hola%20Trazo%20Studio%2C%20quiero%20cotizar%20un%20sitio%20web" target="_blank" rel="noopener">WhatsApp</a></div>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/523351928490?text=Hola%20Trazo%20Studio%2C%20quiero%20cotizar%20un%20sitio%20web" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><i></i><span>WhatsApp</span></a>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.textContent = open ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false');
+      menuBtn.textContent = '☰';
+    }));
+    const hero = document.querySelector('.hero');
+    hero.addEventListener('pointermove', e => {
+      const r = hero.getBoundingClientRect();
+      hero.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      hero.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold: .12});
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    document.getElementById('contactForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const text = encodeURIComponent(
+        `Hola Trazo Studio, soy ${data.get('name')}.
+Negocio: ${data.get('business') || 'No especificado'}
+Correo: ${data.get('email')}
+Proyecto: ${data.get('type')}
+
+${data.get('message') || 'Me gustaría recibir más información.'}`
+      );
+      window.open(`https://wa.me/523351928490?text=${text}`, '_blank', 'noopener');
+    });
+  </script>
+</body>
+</html>
